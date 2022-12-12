@@ -6,6 +6,24 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+/*
+
+//essa parte libera o CORS
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(
+
+    options =>
+    {
+        options.AddPolicy(MyAllowSpecificOrigins, 
+                policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+    });
+
+*/
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -35,7 +53,7 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddSingleton<IJWTAuthenticationManager>(new JWTAuthenticationManager(tokenKey));
 
-builder.Services.AddDbContext<Contexto>();//libera a ijeção de dependencia
+builder.Services.AddDbContext<Contexto>();//libera a ijeÃ§Ã£o de dependencia
 
 var app = builder.Build();
 
@@ -48,6 +66,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+//essa parte libera o CORS
+//app.UseCors(MyAllowSpecificOrigins);
 
 app.MapControllers();
 
