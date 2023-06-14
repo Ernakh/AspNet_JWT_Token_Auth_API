@@ -127,6 +127,35 @@ namespace AulaRestAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        
+        /*[HttpPost]
+        [Route("pessoas/{id}")]
+        public async Task<IActionResult> cadEmailemPessoa(
+            [FromServices] Contexto contexto,
+            [FromBody] Email email,
+            [FromRoute] int id
+            )
+        {
+            var pessoa = await contexto
+                .Pessoas.AsNoTracking()
+                .FirstOrDefaultAsync(p => p.id == id);
+
+            email.pessoa = pessoa;
+
+            try
+            {
+
+                contexto.Set<Email>().Add(email);
+                contexto.Entry(email.pessoa).State = EntityState.Unchanged;
+                await contexto.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Created($"api/pessoas/{pessoa.id}", email);
+        }*/
 
         [AllowAnonymous]
         [HttpPost("autenticar")]
